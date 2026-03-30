@@ -1,0 +1,44 @@
+{
+  "name": "eg.konto",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Martin Rohrmeier <roryphant@gmail.com> (oyo)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oyo/eg.konto.git"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc && vp build && cp -R public/* dist",
+    "dev:api": "tsx --watch --env-file .env src/api/index.ts",
+    "dev:ui": "vp dev",
+    "dev": "concurrently \"yarn dev:api\" \"yarn dev:ui\"",
+    "exec:db": "tsx --env-file .env src/api/clients/dbclient.ts",
+    "exec:key": "tsx --env-file .env src/api/clients/keyclient.ts",
+    "preview": "vp preview",
+    "prepare": "vp config"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "p-memoize": "^8.0.0",
+    "pg": "^8.20.0"
+  },
+  "devDependencies": {
+    "@tsconfig/node24": "^24.0.4",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.5.0",
+    "@types/pg": "^8.20.0",
+    "concurrently": "^9.2.1",
+    "tsx": "^4.21.0",
+    "typescript": "~5.9.3",
+    "vite": "npm:@voidzero-dev/vite-plus-core@latest",
+    "vite-plus": "latest"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "pnpm": {
+    "overrides": {
+      "vite": "npm:@voidzero-dev/vite-plus-core@latest",
+      "vitest": "npm:@voidzero-dev/vite-plus-test@latest"
+    }
+  }
+}

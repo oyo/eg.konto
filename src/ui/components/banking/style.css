@@ -1,0 +1,101 @@
+.filter {
+  position: fixed;
+  padding: 2px;
+  width: 99%;
+  font-size: large;
+}
+.filter::placeholder {
+  padding-left: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  opacity: 0.5;
+  color: #808080;
+}
+
+.metrics {
+  position: fixed;
+  top: 30px;
+  padding: 2px;
+  width: 99%;
+  font-size: smaller;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: rgba(120, 120, 120, 0.5);
+}
+table.banking {
+  padding-top: 54px;
+}
+.banking td {
+  padding: 0 0.8vw;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.date {
+  font-family: Consolas, 'Courier New', Courier, monospace;
+  width: 7vw;
+}
+.type {
+  width: 4vw;
+}
+.name {
+  width: 22vw;
+  max-width: 22vw;
+  font-weight: bold;
+  font-size: 14px;
+}
+.desc {
+  width: 40vw;
+  max-width: 40vw;
+  font-size: 14px;
+}
+.amnt,
+.blnc {
+  width: 8vw;
+  font-family: Consolas, 'Courier New', Courier, monospace;
+  text-align: right;
+  font-weight: bold;
+  color: #00b000;
+}
+.neg {
+  color: orange;
+}
+.banking a {
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  color: #1c69d4;
+  padding-left: 0;
+  padding-right: 0;
+}
+.banking a:hover {
+  color: #0354b6;
+}
+.banking a:before {
+  content: '\23F5';
+  color: #fafafa;
+}
+.banking a:hover:before {
+  content: '\23F5';
+  color: gray;
+}
+
+.download {
+  cursor: pointer;
+  position: fixed;
+  right: 4vh;
+  bottom: 4vh;
+  width: 6vh;
+  height: 6vh;
+  border: 2px solid gray;
+  border-radius: 1vh;
+  font-weight: bold;
+  font-size: 3vh;
+  background-color: white;
+}
+
+.download:hover {
+  background-color: aquamarine;
+}

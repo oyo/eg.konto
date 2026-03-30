@@ -1,0 +1,8 @@
+node_modules
+dist
+pnpm-debug.log*
+*.log
+*.local
+.env
+.vscode/*
+.DS_Store

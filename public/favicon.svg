@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60">
+  <defs>
+    <style>.p{fill:#008800;}.m{fill:#ff8800;}</style>
+  </defs>
+  <path class="p" d="M 20 0 l 20 0 l 0 60 l -20 0 z"/>
+  <path class="m" d="M 0 20 l 60 0 l 0 20 l -60 0 z"/>
+</svg>
