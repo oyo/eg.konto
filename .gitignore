@@ -1,6 +1,7 @@
 node_modules
 dist
 pnpm-debug.log*
+up.sh
 *.log
 *.local
 .env
