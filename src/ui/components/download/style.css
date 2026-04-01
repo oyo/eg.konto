@@ -1,0 +1,17 @@
+.download {
+  cursor: pointer;
+  position: fixed;
+  right: 4vh;
+  bottom: 4vh;
+  width: 6vh;
+  height: 6vh;
+  border: 2px solid gray;
+  border-radius: 1vh;
+  font-weight: bold;
+  font-size: 3vh;
+  background-color: white;
+}
+
+.download:hover {
+  background-color: rgb(231, 254, 255);
+}

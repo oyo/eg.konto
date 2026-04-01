@@ -27,7 +27,7 @@ try {
         .map((item: Banking, i: number) => ((item.seq = last.seq + i + 1), item))
       const n = await banking.addItems(list)
       console.log(`added ${String(n)} rows`)
-      if (n >= 0) {
+      if (n >= -1) {
         await banking.export()
         await encryptBanking(
           `../data/csv/${new Date().toISOString().substring(2, 10).replace(/-/g, '')}-banking.tsv`,

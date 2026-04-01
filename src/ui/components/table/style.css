@@ -54,24 +54,6 @@ table.banking {
   color: gray;
 }
 
-.download {
-  cursor: pointer;
-  position: fixed;
-  right: 4vh;
-  bottom: 4vh;
-  width: 6vh;
-  height: 6vh;
-  border: 2px solid gray;
-  border-radius: 1vh;
-  font-weight: bold;
-  font-size: 3vh;
-  background-color: white;
-}
-
-.download:hover {
-  background-color: aquamarine;
-}
-
 .seq {
   font-family: Consolas, 'Courier New', Courier, monospace;
   font-size: 10px;

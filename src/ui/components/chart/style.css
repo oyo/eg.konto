@@ -1,0 +1,24 @@
+.chartButton {
+  cursor: pointer;
+  position: fixed;
+  right: 12vh;
+  bottom: 4vh;
+  width: 6vh;
+  height: 6vh;
+  border: 2px solid gray;
+  border-radius: 1vh;
+  font-weight: bold;
+  font-size: 3vh;
+  background-color: white;
+}
+
+.chartButton:hover {
+  width: 60vh;
+  height: 60vh;
+  background-color: rgb(231, 254, 255);
+}
+
+.chartButton svg {
+  width: 100%;
+  height: 100%;
+}

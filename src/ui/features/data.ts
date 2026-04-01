@@ -1,6 +1,7 @@
-import { cryptoUtils } from '../../../shared/datautils/crypto.js'
-import { BankingAttributes } from '../../../shared/types/banking.js'
-import { defaultPaginMeta, type PaginTable } from '../../../shared/types/data.js'
+import { cryptoUtils } from '../../shared/datautils/crypto.js'
+import { BankingAttributes } from '../../shared/types/banking.js'
+import { defaultPaginMeta } from '../../shared/types/data.js'
+import store from './store.js'
 
 const decrypt = async (pw: string, st: string, iv: string, cipher: string): Promise<string> => {
   const salt = Uint8Array.from(st, (c) => c.charCodeAt(0))
@@ -8,7 +9,7 @@ const decrypt = async (pw: string, st: string, iv: string, cipher: string): Prom
   return await cryptoUtils.decryptText(key, cipher, iv)
 }
 
-export const bankingDataLoader = async (url: string, userkey: string): Promise<PaginTable> => {
+export const loadData = async (url: string, userkey: string): Promise<void> => {
   let keys: Record<string, string>
   {
     const response = await fetch('data/keys.json')
@@ -28,7 +29,7 @@ export const bankingDataLoader = async (url: string, userkey: string): Promise<P
     const [pw, st] = mkey.split('.')
     const [iv, cipher] = data.split('.')
     const plain = await decrypt(pw, st, iv, cipher)
-    return {
+    store.banking = {
       headers: BankingAttributes,
       meta: defaultPaginMeta,
       rows: plain
@@ -37,6 +38,5 @@ export const bankingDataLoader = async (url: string, userkey: string): Promise<P
         .reverse()
         .map((r) => r.split('\t').map((w) => (w === '\\N' ? '' : w))),
     }
-  }
-  throw Error('data not loaded')
+  } else throw Error('data not loaded')
 }

@@ -62,7 +62,7 @@ export class BankingData extends Database<Banking> {
 
   async export() {
     await Database.pool.query(
-      `copy (select * from ${this.table}) to '/opt/data/csv/${new Date().toISOString().substring(2, 10).replace(/-/g, '')}-banking.tsv'`,
+      `copy (select * from ${this.table} order by seq) to '/opt/data/csv/${new Date().toISOString().substring(2, 10).replace(/-/g, '')}-banking.tsv'`,
     )
   }
 
