@@ -28,40 +28,12 @@ table.banking {
   padding-top: 54px;
 }
 .banking td {
-  padding: 0 0.8vw;
+  padding: 0 0.4vw;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.date {
-  font-family: Consolas, 'Courier New', Courier, monospace;
-  width: 7vw;
-}
-.type {
-  width: 4vw;
-}
-.name {
-  width: 22vw;
-  max-width: 22vw;
-  font-weight: bold;
-  font-size: 14px;
-}
-.desc {
-  width: 40vw;
-  max-width: 40vw;
-  font-size: 14px;
-}
-.amnt,
-.blnc {
-  width: 8vw;
-  font-family: Consolas, 'Courier New', Courier, monospace;
-  text-align: right;
-  font-weight: bold;
-  color: #00b000;
-}
-.neg {
-  color: orange;
-}
+
 .banking a {
   cursor: pointer;
   text-decoration: none;
@@ -98,4 +70,39 @@ table.banking {
 
 .download:hover {
   background-color: aquamarine;
+}
+
+.seq {
+  font-family: Consolas, 'Courier New', Courier, monospace;
+  font-size: 10px;
+  width: 2vw;
+}
+.date {
+  font-family: Consolas, 'Courier New', Courier, monospace;
+  width: 7vw;
+}
+.type {
+  width: 4vw;
+}
+.name {
+  width: 22vw;
+  max-width: 22vw;
+  font-weight: bold;
+  font-size: 14px;
+}
+.desc {
+  width: 41vw;
+  max-width: 41vw;
+  font-size: 14px;
+}
+.amnt,
+.blnc {
+  width: 8vw;
+  font-family: Consolas, 'Courier New', Courier, monospace;
+  text-align: right;
+  font-weight: bold;
+  color: #00b000;
+}
+.neg {
+  color: orange;
 }

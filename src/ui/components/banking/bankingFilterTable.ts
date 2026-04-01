@@ -4,6 +4,7 @@ import { addEvents, debounce, N } from '../../toolkit/index.js'
 import './style.css'
 
 const RE = {
+  seq: /^#\d+/,
   date: /^20[12]\d-/,
   type: /^(RE|UW|GS|AB|LS|GSDA|DA)$/i,
 }
@@ -21,6 +22,7 @@ interface BankingMetrics {
 }
 
 interface BankingRow {
+  seq: number
   amnt: number
   blnc: number
   date: string
@@ -34,6 +36,7 @@ const pageArgs = new URLSearchParams(location.search)
 const filterColumns = (table: PaginTable) =>
   table.rows.map(
     (row: DataValue[]): BankingRow => ({
+      seq: Number(row[0]),
       amnt: Number(row[5]),
       blnc: Number(row[7]),
       date: row[1] as string,
@@ -46,7 +49,8 @@ const filterColumns = (table: PaginTable) =>
 const filterRows = (rows: BankingRow[], expr: string) => {
   const re = new RegExp(`(${expr})`, 'i')
   let filt: (row: BankingRow) => boolean
-  if (RE.date.exec(expr)) filt = (row) => re.exec(row.date) !== null
+  if (RE.seq.exec(expr)) filt = (row) => Number(expr.substring(1)) === row.seq
+  else if (RE.date.exec(expr)) filt = (row) => re.exec(row.date) !== null
   else if (RE.type.exec(expr)) {
     const typere = new RegExp(`^${expr}$`, 'i')
     filt = (row) => typere.exec(row.type) !== null
@@ -118,6 +122,7 @@ const render = (rows: BankingRow[]) => {
   rows
     .map((row) =>
       N('tr', [
+        N('td', SL('#' + String(row.seq), String(row.seq)), { class: 'seq' }),
         N(
           'td',
           ((d) => [
