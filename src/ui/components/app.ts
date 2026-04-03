@@ -10,7 +10,7 @@ const param = new URLSearchParams(location.search)
 const userkey = param.get('key')
 
 if (userkey) {
-  await loadData('./data/tb.txt', userkey)
+  await loadData(userkey)
   setFilterData(store.banking)
   renderData(store.banking)
 }

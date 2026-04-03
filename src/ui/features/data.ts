@@ -9,34 +9,39 @@ const decrypt = async (pw: string, st: string, iv: string, cipher: string): Prom
   return await cryptoUtils.decryptText(key, cipher, iv)
 }
 
-export const loadData = async (url: string, userkey: string): Promise<void> => {
+const loadYear = async (year: number, mkey: string): Promise<string> => {
+  const response = await fetch(`./data/ta/${year}.txt`)
+  const data = await response.text()
+
+  const [pw, st] = mkey.split('.')
+  const [iv, cipher] = data.split('.')
+  return await decrypt(pw, st, iv, cipher)
+}
+
+export const loadData = async (userkey: string): Promise<void> => {
   let keys: Record<string, string>
   {
     const response = await fetch('data/keys.json')
     keys = (await response.json()) as Record<string, string>
   }
-  let data: string
-  {
-    const response = await fetch(url)
-    data = await response.text()
-  }
+  if (userkey.length !== 22) return
+  const upw = userkey.substring(0, 11)
+  const ust = userkey.substring(11)
+  const [uiv, ucipher] = keys[ust].split('.')
+  const mkey = await decrypt(upw, ust, uiv, ucipher)
+  const currentYear = new Date().getFullYear()
+  const years = Array(currentYear - 2015)
+    .fill(0)
+    .map((_, i) => i + 2016)
+  const data = (await Promise.all(years.map(async (y) => loadYear(y, mkey)))).join('\n')
 
-  if (data && userkey.length > 0) {
-    const upw = userkey.substring(0, 11)
-    const ust = userkey.substring(11)
-    const [uiv, ucipher] = keys[ust].split('.')
-    const mkey = await decrypt(upw, ust, uiv, ucipher)
-    const [pw, st] = mkey.split('.')
-    const [iv, cipher] = data.split('.')
-    const plain = await decrypt(pw, st, iv, cipher)
-    store.banking = {
-      headers: BankingAttributes,
-      meta: defaultPaginMeta,
-      rows: plain
-        .trim()
-        .split('\n')
-        .reverse()
-        .map((r) => r.split('\t').map((w) => (w === '\\N' ? '' : w))),
-    }
-  } else throw Error('data not loaded')
+  store.banking = {
+    headers: BankingAttributes,
+    meta: defaultPaginMeta,
+    rows: data
+      .trim()
+      .split('\n')
+      .reverse()
+      .map((r) => r.split('\t').map((w) => (w === '\\N' ? '' : w))),
+  }
 }

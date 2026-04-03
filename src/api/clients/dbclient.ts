@@ -2,7 +2,7 @@ import type { Banking } from '@shared/types/banking.js'
 
 import { BankingData } from '@api/features/data/banking.js'
 import { Database } from '@api/features/data/index.js'
-import { encryptBanking, parsePropCsv } from '@shared/datautils/banking.js'
+import { encryptBankingSlice, parsePropCsv } from '@shared/datautils/banking.js'
 import fs from 'fs'
 
 const banking = new BankingData()
@@ -25,12 +25,14 @@ try {
       const list = all
         .slice(lasti + 1)
         .map((item: Banking, i: number) => ((item.seq = last.seq + i + 1), item))
+      console.log(list)
       const n = await banking.addItems(list)
       console.log(`added ${String(n)} rows`)
-      if (n >= -1) {
+      if (n > 0) {
         await banking.export()
-        await encryptBanking(
+        await encryptBankingSlice(
           `../data/csv/${new Date().toISOString().substring(2, 10).replace(/-/g, '')}-banking.tsv`,
+          [...new Set(list.map((r) => r.bdate.substring(0, 4)))],
         )
       }
     } catch (err) {

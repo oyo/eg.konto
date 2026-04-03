@@ -47,7 +47,6 @@ const aggregate = (keys: number[], data: number[][]): CandlestickEntry[] => {
       max,
     }
   })
-  console.log(a)
   return a
 }
 
@@ -58,27 +57,8 @@ const prepareData = (data: number[][]) =>
   )
 
 const view = N('div', undefined, { class: 'chartButton' })
-/*
-const view = addEvents(N('button', 'C', { class: 'chartButton' }), {
-  click: () => {
-    if (store.banking.rows.length > 0)
-      renderChart(
-        prepareData(
-          store.banking.rows.reverse().map((r) => [
-            ...(r[1] as string)
-              .split('-')
-              .slice(0, 2)
-              .map((n) => Number(n)),
-            Number(r[7]),
-          ]),
-        ),
-      )
-  },
-})
-*/
 
 export const renderData = (data: PaginTable) => {
-  console.log(data)
   view.innerHTML = renderChart(
     prepareData(
       data.rows.reverse().map((r) => [
@@ -86,7 +66,7 @@ export const renderData = (data: PaginTable) => {
           .split('-')
           .slice(0, 2)
           .map((n) => Number(n)),
-        Number(r[7]) / 1000,
+        Number(r[6]) / 1000,
       ]),
     ),
   )

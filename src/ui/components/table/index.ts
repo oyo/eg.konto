@@ -38,7 +38,7 @@ const filterColumns = (table: PaginTable) =>
     (row: DataValue[]): BankingRow => ({
       seq: Number(row[0]),
       amnt: Number(row[5]),
-      blnc: Number(row[7]),
+      blnc: Number(row[6]),
       date: row[1] as string,
       desc: row[4] as string,
       name: row[2] as string,
@@ -148,7 +148,8 @@ const renderFunction = (skipHistory?: boolean) => {
   const expr = filterInput.value
   render(filterRows(dataTable, expr))
   if (!skipHistory) {
-    pageArgs.set('q', expr)
+    if (expr.length === 0) pageArgs.delete('q')
+    else pageArgs.set('q', expr)
     history.pushState({}, `EGRO - ${expr}`, `${location.pathname}?${pageArgs.toString()}`)
   }
 }

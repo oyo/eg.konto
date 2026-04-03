@@ -15,7 +15,7 @@ export interface Banking {
   amountCurrency: string
   balance?: number
   balanceCurrency?: string
-  bdate: Date | string
+  bdate: string
   description: string
   name: string
   seq: number
